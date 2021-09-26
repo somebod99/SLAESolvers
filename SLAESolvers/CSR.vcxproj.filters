@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков\Matrix">
+      <UniqueIdentifier>{fd6fde45-43dd-4cc0-a24b-72f6956c65dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Vector">
+      <UniqueIdentifier>{15282e9d-7d81-45ef-8751-d5fbe6de6bc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Solvers">
+      <UniqueIdentifier>{483cdb85-65fa-4e06-8d6e-8f7ca8f3c355}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\OrthogonalTransformation">
+      <UniqueIdentifier>{64132655-da08-4878-978f-a3b4d87f7ed4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Substitution">
+      <UniqueIdentifier>{d96d18a4-c263-480b-9124-83c007ff4b87}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Matrix.h">
+      <Filter>Файлы заголовков\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Файлы заголовков\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectSolvers.h">
+      <Filter>Файлы заголовков\Solvers</Filter>
+    </ClInclude>
+    <ClInclude Include="CONST.h">
+      <Filter>Файлы заголовков\Solvers</Filter>
+    </ClInclude>
+    <ClInclude Include="OrthogonalTransformation.h">
+      <Filter>Файлы заголовков\OrthogonalTransformation</Filter>
+    </ClInclude>
+    <ClInclude Include="Substitution.h">
+      <Filter>Файлы заголовков\Substitution</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
