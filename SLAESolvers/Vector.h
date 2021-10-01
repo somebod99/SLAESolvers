@@ -1,6 +1,7 @@
 #pragma once
 #include <exception>
 #include <cmath>
+#include <iomanip>
 
 template<class T>
 class Vector
@@ -228,5 +229,5 @@ template<class T>
 void Vector<T>::ConsolePrint() const
 {
 	for (int i = 0; i < N; ++i)
-		std::cout << elem[i] << '\n';
+		std::cout << std::setprecision(16) << elem[i] << '\n';
 }

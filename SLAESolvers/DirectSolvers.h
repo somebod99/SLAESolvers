@@ -176,3 +176,33 @@ public:
 	QRDecomposition(const Matrix<T>& A, const QRAlgorithm& method);
 	Vector<T> Solve(const Vector<T>& F);
 };
+
+template<class T>
+QRDecomposition<T>::QRDecomposition(const Matrix<T>& A, const QRAlgorithm& method)
+{
+	Q.resize(A.getRowCount(), A.getColumnCount());
+
+	switch (method)
+	{
+	case QRAlgorithm::Givens:
+		for (int i = 0; i < A.getRowCount(); ++i)
+			Q[i][i] = 1;
+
+		GivensTransformation::GivensOrthogonalization(A, Q, R);
+		break;
+		
+	case QRAlgorithm::Householder:
+		for (int i = 0; i < A.getRowCount(); ++i)
+			Q[i][i] = 1;
+
+		HouseholderTransformation::HouseholderOrthogonalization(A, Q, R);
+		break;
+	}
+}
+
+template<class T>
+Vector<T> QRDecomposition<T>::Solve(const Vector<T>& F)
+{
+	auto res = Q.MultiplicationTransMatrixVector(F);
+	return Substitution::BackRowSubstitution(R, res);
+}

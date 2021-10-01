@@ -36,6 +36,7 @@ public:
 
 	bool operator==(const Matrix<T>&) const;
 
+	void resize(const int&, const int&);
 	Vector<T> getColumn(const int&);
 	Matrix<T> TransposeMatrix();
 	Vector<T> MultiplicationTransMatrixVector(const Vector<T>&);
@@ -226,7 +227,7 @@ Matrix<T> Matrix<T>::operator*(const T& x) const
 template<class T>
 Vector<T> Matrix<T>::operator*(const Vector<T>& rhs) const
 {
-	if (M != rhs.N)
+	if (M != rhs.size())
 		throw std::exception("Dimensional mismatch");
 
 	Vector<T> res(N);
@@ -303,6 +304,31 @@ bool Matrix<T>::operator==(const Matrix<T>& rhs) const
 }
 
 template<class T>
+void Matrix<T>::resize(const int& n, const int& m)
+{
+	if (elem != nullptr)
+	{
+		for (int i = 0; i < N; ++i)
+			delete[] elem[i];
+
+		delete[] elem;
+	}
+
+	N = n;
+	M = m;
+
+	elem = new T * [N];
+
+	for (int i = 0; i < N; ++i)
+	{
+		elem[i] = new T[M];
+
+		for (int j = 0; j < M; ++j)
+			elem[i][j] = 0;
+	}
+}
+
+template<class T>
 Vector<T> Matrix<T>::getColumn(const int& num)
 {
 	Vector<T> res(N);
@@ -343,7 +369,7 @@ Vector<T> Matrix<T>::MultiplicationTransMatrixVector(const Vector<T>& rhs)
 	{
 		for (int j = 0; j < M; ++j)
 		{
-			res.elem[i][j] += elem[j][i] * rhs[j];
+			res.elem[i] += elem[j][i] * rhs[j];
 		}
 	}
 

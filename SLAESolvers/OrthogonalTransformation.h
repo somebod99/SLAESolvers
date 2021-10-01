@@ -51,3 +51,65 @@ public:
 	template<class T>
 	static void HouseholderOrthogonalization(const Matrix<T>&, Matrix<T>&, Matrix<T>&);
 };
+
+template<class T>
+void HouseholderTransformation::HouseholderOrthogonalization(const Matrix<T>& A, Matrix<T>& Q, Matrix<T>& R)
+{
+	R = A;
+	double tmp, beta, mu;
+	Vector<T> p(R.getRowCount());
+
+	for (int i = 0; i < R.getColumnCount() - 1; ++i)
+	{
+		tmp = 0.0;
+
+		for (int k = i; k < R.getRowCount(); ++k)
+			tmp += std::pow(R[k][i], 2);
+
+		if (std::sqrt(std::abs(tmp - R[i][i] * R[i][i])) > CONST::EPS)
+		{
+			beta = std::sqrt(tmp);
+
+			if (R[i][i] >= 0)
+				beta = -beta;
+
+			mu = 1.0 / beta / (beta - R[i][i]);
+
+			for (int k = 0; k < R.getRowCount(); ++k)
+			{
+				p[k] = 0;
+				
+				if(k >= i)
+					p[k] = R[k][i];
+			}
+
+			p[i] -= beta;
+
+			for (int m = i; m < R.getColumnCount(); ++m)
+			{
+				tmp = 0;
+
+				for (int n = i; n < R.getRowCount(); ++n)
+					tmp += R[n][m] * p[n];
+
+				tmp *= mu;
+
+				for (int n = i; n < R.getRowCount(); ++n)
+					R[n][m] -= tmp * p[n];
+			}
+
+			for (int m = 0; m < Q.getRowCount(); ++m)
+			{
+				tmp = 0;
+
+				for (int n = i; n < Q.getRowCount(); ++n)
+					tmp += Q[m][n] * p[n];
+
+				tmp *= mu;
+
+				for (int n = i; n < Q.getRowCount(); ++n)
+					Q[m][n] -= tmp * p[n];
+			}
+		}
+	}
+}
