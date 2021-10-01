@@ -121,12 +121,12 @@ LUDecomposition<T>::LUDecomposition(const Matrix<T>& A)
 
 	GaussMethod::DirectWay(LU);
 
-	for (int i = 1; i < LU.getRowCount(); ++i)
+	for (int i = 0; i < LU.getRowCount(); ++i)
 	{
-		T sum = 0;
-
 		for (int j = 0; j < i; ++j)
 		{
+			double sum = 0;
+
 			for (int k = 0; k < j; ++k)
 			{
 				sum += LU[i][k] * LU[k][j];
@@ -156,7 +156,9 @@ Vector<T> LUDecomposition<T>::DirectWay(const Matrix<T>& A, const Vector<T>& F)
 template<class T>
 Vector<T> LUDecomposition<T>::Solve(const Vector<T>& F)
 {
-	return Substitution::BackRowSubstitution(LU, DirectWay(LU, F));
+	auto res = DirectWay(LU, F);
+	res.ConsolePrint();
+	return Substitution::BackRowSubstitution(LU, res);
 }
 
 enum class QRAlgorithm
